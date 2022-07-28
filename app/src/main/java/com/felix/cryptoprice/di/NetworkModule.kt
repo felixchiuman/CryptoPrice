@@ -1,5 +1,6 @@
 package com.felix.cryptoprice.di
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.felix.cryptoprice.data.api.service.ApiHelper
 import com.felix.cryptoprice.data.api.service.ApiService
 import okhttp3.OkHttpClient
@@ -30,6 +31,7 @@ val networkModule = module {
                     .build()
                 chain.proceed(request)
             }
+            .addInterceptor(ChuckerInterceptor(this.androidApplication()))
             .build()
     }
     single {

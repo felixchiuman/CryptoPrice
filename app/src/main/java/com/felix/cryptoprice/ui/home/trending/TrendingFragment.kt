@@ -17,11 +17,21 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TrendingFragment : BaseFragment<FragmentTrendingBinding>(FragmentTrendingBinding::inflate) {
 
+    private lateinit var adapter : TrendingAdapter
+
     private val trendingViewModel by viewModel<TrendingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter = TrendingAdapter(object  : TrendingAdapter.OnClickListener{
+            override fun onClickItem(data: GetTrendingLatestResponse.Data) {
+                val id = data.id
+                val actionToDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment(id)
+                findNavController().navigate(actionToDetailFragment)
+            }
+        })
+        binding.rvTrending.adapter = adapter
         setupObserver()
         trendingViewModel.getTrendingLatest()
     }
@@ -35,15 +45,7 @@ class TrendingFragment : BaseFragment<FragmentTrendingBinding>(FragmentTrendingB
                     progressDialog.show()
                 }
                 Status.SUCCESS -> {
-                    val adapter = TrendingAdapter(object  : TrendingAdapter.OnClickListener{
-                        override fun onClickItem(data: GetTrendingLatestResponse.Data) {
-                            val id = data.id
-                            val actionToDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment(id)
-                            findNavController().navigate(actionToDetailFragment)
-                        }
-                    })
                     adapter.submitData(it.data?.body()?.data)
-                    binding.rvTrending.adapter = adapter
                     progressDialog.dismiss()
                 }
                 Status.ERROR -> {

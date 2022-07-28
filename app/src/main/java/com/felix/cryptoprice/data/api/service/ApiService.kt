@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("cryptocurrency/listing/latest")
+    @GET("cryptocurrency/listings/latest")
     suspend fun getTrending(): Response<GetTrendingLatestResponse>
 }
