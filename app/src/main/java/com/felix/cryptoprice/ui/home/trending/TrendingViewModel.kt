@@ -19,7 +19,7 @@ class TrendingViewModel(private val repository: Repository): ViewModel() {
         viewModelScope.launch {
             _trendingResponse.postValue(Resource.loading())
             try {
-                val response = Resource.success(repository.getTrending())
+                _trendingResponse.postValue(Resource.success(repository.getTrending()))
             }catch (e: Exception) {
                 _trendingResponse.postValue(Resource.error(e.message))
             }

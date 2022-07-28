@@ -2,29 +2,22 @@ package com.felix.cryptoprice.ui.home
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.felix.cryptoprice.ui.home.cap.MarketCapFragment
+import com.felix.cryptoprice.ui.home.trending.TrendingFragment
 
-class FragmentAdapter(fm : FragmentManager) : FragmentStatePagerAdapter(fm,
-    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class FragmentAdapter(fragment: Fragment)
+    : FragmentStateAdapter(fragment) {
+    override fun getItemCount(): Int = 2
 
-    var fragmentList : ArrayList<Fragment> = ArrayList()
-    var fragmentTitle : ArrayList<String> = ArrayList()
-
-
-    override fun getCount(): Int {
-        return fragmentList.size
+    override fun createFragment(position: Int): Fragment {
+        var fragment = Fragment()
+        when(position) {
+            0 -> fragment = TrendingFragment()
+            1 -> fragment = MarketCapFragment()
+        }
+        return fragment
     }
 
-    override fun getItem(position: Int): Fragment {
-        return fragmentList[position]
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return fragmentTitle[position]
-    }
-
-    fun addFragment(fragment: Fragment,title : String){
-        fragmentList.add(fragment)
-        fragmentTitle.add(title)
-    }
 }
