@@ -1,10 +1,8 @@
 package com.felix.cryptoprice.ui.home
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.felix.cryptoprice.ui.home.cap.MarketCapFragment
+import com.felix.cryptoprice.ui.home.convert.ConvertFragment
 import com.felix.cryptoprice.ui.home.trending.TrendingFragment
 
 class FragmentAdapter(fragment: Fragment)
@@ -15,7 +13,7 @@ class FragmentAdapter(fragment: Fragment)
         var fragment = Fragment()
         when(position) {
             0 -> fragment = TrendingFragment()
-            1 -> fragment = MarketCapFragment()
+            1 -> fragment = ConvertFragment()
         }
         return fragment
     }

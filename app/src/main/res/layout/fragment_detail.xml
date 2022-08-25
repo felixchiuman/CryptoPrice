@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.detail.DetailFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.detail.DetailFragment"
+    android:background="@color/black75">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_36"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp" />
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="128dp"
+        android:layout_height="140dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        android:layout_margin="16dp"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:scaleType="fitXY"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_poster"
+        app:layout_constraintTop_toTopOf="@id/iv_poster"
+        app:layout_constraintBottom_toBottomOf="@id/iv_poster"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Lorem Ipsum"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_margin="16sp"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_desc_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_poster"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in eros eget libero sagittis lacinia. Morbi imperdiet, tellus et lacinia viverra, justo enim dictum ex, id vulputate arcu odio volutpat nunc. Pellentesque eu egestas dolor. Cras dapibus sapien quam, eu viverra nibh dignissim a. Proin nunc lectus, ornare bibendum dolor ac, auctor finibus lectus. Nullam aliquam quam non velit hendrerit venenatis. Cras at purus sit amet augue mattis elementum eu in nunc."
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_margin="16sp"
+        android:paddingStart="16sp"
+        android:paddingEnd="16sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

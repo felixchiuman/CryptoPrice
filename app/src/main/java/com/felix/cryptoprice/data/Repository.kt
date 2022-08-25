@@ -5,4 +5,6 @@ import com.felix.cryptoprice.data.api.service.ApiHelper
 class Repository(private val apiHelper: ApiHelper) {
 
     suspend fun  getTrending() = apiHelper.getTrending()
+
+    suspend fun getInfo(type: String = "") = apiHelper.getInfo(type)
 }

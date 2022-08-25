@@ -3,12 +3,8 @@ package com.felix.cryptoprice.ui.home.trending
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.felix.cryptoprice.R
 import com.felix.cryptoprice.data.Status
 import com.felix.cryptoprice.data.api.model.trending.GetTrendingLatestResponse
 import com.felix.cryptoprice.databinding.FragmentTrendingBinding
@@ -27,8 +23,8 @@ class TrendingFragment : BaseFragment<FragmentTrendingBinding>(FragmentTrendingB
 
         adapter = TrendingAdapter(object  : TrendingAdapter.OnClickListener{
             override fun onClickItem(data: GetTrendingLatestResponse.Data) {
-                val id = data.id
-                val actionToDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment(id)
+                val symbol = data.symbol
+                val actionToDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment(symbol)
                 findNavController().navigate(actionToDetailFragment)
             }
         })

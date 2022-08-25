@@ -44,14 +44,16 @@ class TrendingAdapter (private val onItemClick: OnClickListener) : RecyclerView.
             binding.apply {
                 val price = data.quote.uSD.price
                 val limit = String.format("%.2f", price)
+                val percent = data.quote.uSD.percentChange1h
+                val limitPercent = String.format("%.2f", percent)
                 tvCode.text = data.symbol
                 tvName.text = data.name
                 tvPrice.text = "$$limit"
                 if (data.quote.uSD.percentChange1h > 0) {
-                    tvPercent.text = "+${data.quote.uSD.percentChange1h}%"
+                    tvPercent.text = "+$limitPercent%"
                     tvPercent.setTextColor(binding.root.context.resources.getColor(android.R.color.holo_green_dark))
                 } else {
-                    tvPercent.text = "${data.quote.uSD.percentChange1h}%"
+                    tvPercent.text = "$limitPercent"
                     tvPercent.setTextColor(binding.root.context.resources.getColor(android.R.color.holo_red_dark))
                 }
                 root.setOnClickListener {
