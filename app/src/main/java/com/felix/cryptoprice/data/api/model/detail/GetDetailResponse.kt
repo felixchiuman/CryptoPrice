@@ -7,7 +7,7 @@ data class GetDetailResponse(
     @SerializedName("status")
     val status: Status,
     @SerializedName("data")
-    val `data`: Data
+    val `data`: HashMap<String, Data.BTC>
 ) {
     data class Status(
         @SerializedName("timestamp")

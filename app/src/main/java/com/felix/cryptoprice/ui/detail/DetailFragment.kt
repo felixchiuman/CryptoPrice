@@ -23,38 +23,58 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val symbol = args.symbol.toLowerCase()
-
-        setUpObservers()
-        detailViewModel.getInfo("$symbol")
+        val symbol = args.symbol
 
         binding.ivBack.setOnClickListener {
             findNavController().navigate(R.id.action_detailFragment_to_homeFragment)
         }
+
+        setUpObservers()
+        detailViewModel.getInfo("$symbol")
     }
 
     private fun setUpObservers() {
         val progressDialog = ProgressDialog(requireContext())
         detailViewModel.detailResponse.observe(viewLifecycleOwner){
+            val symbol = args.symbol
             when(it.status){
                 Status.SUCCESS -> {
-                    Glide.with(requireContext()).load(it.data?.body()?.data?.bTC?.logo).fitCenter().into(binding.ivPoster)
-                    binding.tvDetailTitle.text = it.data?.body()?.data?.bTC?.name.toString()
-                    binding.tvDescDetail.text = it.data?.body()?.data?.bTC?.description.toString()
-                    binding.btnWeb.visibility = View.VISIBLE
-                    binding.btnReddit.visibility = View.VISIBLE
+                    Glide.with(requireContext()).load(it.data?.body()?.data?.get("$symbol")?.logo).fitCenter().into(binding.ivPoster)
+                    binding.tvDetailTitle.text = it.data?.body()?.data?.get("$symbol")?.name
+                    binding.tvDescDetail.text = it.data?.body()?.data?.get("$symbol")?.description
 
-//                    val web = it.data?.body()?.data?.bTC?.urls?.website
-//                    val reddit = it.data?.body()?.data?.bTC?.urls?.reddit
-//
-//                    binding.btnWeb.setOnClickListener {
-//                        val i = Intent(Intent.ACTION_VIEW, Uri.parse("$web"))
-//                        startActivity(i)
-//                    }
-//                    binding.btnReddit.setOnClickListener {
-//                        val i = Intent(Intent.ACTION_VIEW, Uri.parse("$reddit"))
-//                        startActivity(i)
-//                    }
+                    if (binding.tvDescDetail.text == "" || binding.tvDescDetail.text == "") {
+                        detailViewModel.getInfo("$symbol")
+                    }
+
+                    val website = it.data?.body()?.data?.get("$symbol")?.urls?.website
+                    val reddit = it.data?.body()?.data?.get("$symbol")?.urls?.reddit
+
+                        if (website!!.isNotEmpty()) {
+                            val websiteValue = website?.get(0)
+                            if (websiteValue != null) {
+                                if (websiteValue.isNotEmpty()){
+                                    binding.btnWeb.visibility = View.VISIBLE
+                                }
+                                binding.btnWeb.setOnClickListener {
+                                    val i = Intent(Intent.ACTION_VIEW, Uri.parse("$websiteValue"))
+                                    startActivity(i)
+                                }
+                            }
+                        }
+                        if (reddit!!.isNotEmpty()) {
+                            val redditValue = reddit?.get(0)
+                            if (redditValue != null) {
+                                if (redditValue.isNotEmpty()){
+                                    binding.btnReddit.visibility = View.VISIBLE
+                                }
+                                binding.btnWeb.setOnClickListener {
+                                    val i = Intent(Intent.ACTION_VIEW, Uri.parse("$redditValue"))
+                                    startActivity(i)
+                                }
+                            }
+                        }
+
                     progressDialog.dismiss()
                 }
                 Status.ERROR -> {

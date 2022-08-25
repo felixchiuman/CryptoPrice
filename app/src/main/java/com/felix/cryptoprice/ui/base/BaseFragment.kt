@@ -50,5 +50,4 @@ abstract class BaseFragment<B : ViewBinding>(private val inflate: Inflate<B>): F
         snackBar.setAction(actionText) { _ -> action.invoke() }
         snackBar.show()
     }
-
 }
