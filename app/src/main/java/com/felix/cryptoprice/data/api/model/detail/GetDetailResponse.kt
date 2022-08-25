@@ -25,10 +25,10 @@ data class GetDetailResponse(
     )
 
     data class Data(
-        @SerializedName("1")
-        val x1: X1
+        @SerializedName("BTC")
+        val bTC: BTC
     ) {
-        data class X1(
+        data class BTC(
             @SerializedName("id")
             val id: Int,
             @SerializedName("name")

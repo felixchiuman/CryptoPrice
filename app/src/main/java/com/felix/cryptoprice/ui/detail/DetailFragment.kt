@@ -1,6 +1,8 @@
 package com.felix.cryptoprice.ui.detail
 
 import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -36,9 +38,23 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         detailViewModel.detailResponse.observe(viewLifecycleOwner){
             when(it.status){
                 Status.SUCCESS -> {
-                    Glide.with(requireContext()).load(it.data?.body()?.data?.x1?.logo).into(binding.ivPoster)
-                    binding.tvDetailTitle.text = it.data?.body()?.data?.x1?.name
-                    binding.tvDescDetail.text = it.data?.body()?.data?.x1?.symbol
+                    Glide.with(requireContext()).load(it.data?.body()?.data?.bTC?.logo).fitCenter().into(binding.ivPoster)
+                    binding.tvDetailTitle.text = it.data?.body()?.data?.bTC?.name.toString()
+                    binding.tvDescDetail.text = it.data?.body()?.data?.bTC?.description.toString()
+                    binding.btnWeb.visibility = View.VISIBLE
+                    binding.btnReddit.visibility = View.VISIBLE
+
+//                    val web = it.data?.body()?.data?.bTC?.urls?.website
+//                    val reddit = it.data?.body()?.data?.bTC?.urls?.reddit
+//
+//                    binding.btnWeb.setOnClickListener {
+//                        val i = Intent(Intent.ACTION_VIEW, Uri.parse("$web"))
+//                        startActivity(i)
+//                    }
+//                    binding.btnReddit.setOnClickListener {
+//                        val i = Intent(Intent.ACTION_VIEW, Uri.parse("$reddit"))
+//                        startActivity(i)
+//                    }
                     progressDialog.dismiss()
                 }
                 Status.ERROR -> {

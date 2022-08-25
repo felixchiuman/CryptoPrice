@@ -11,6 +11,6 @@ interface ApiService {
     @GET("cryptocurrency/listings/latest")
     suspend fun getTrending(): Response<GetTrendingLatestResponse>
 
-    @GET("cryptocurrency/quotes/latest")
+    @GET("cryptocurrency/info")
     suspend fun getInfo(@Query("symbol")type: String = ""): Response<GetDetailResponse>
 }
