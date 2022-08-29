@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -50,24 +51,25 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     val website = it.data?.body()?.data?.get("$symbol")?.urls?.website
                     val reddit = it.data?.body()?.data?.get("$symbol")?.urls?.reddit
 
-                        if (website!!.isNotEmpty()) {
+                        if (website?.isNotEmpty() == true) {
                             val websiteValue = website?.get(0)
                             if (websiteValue != null) {
-                                if (websiteValue.isNotEmpty()){
+//                                if (websiteValue.isNotEmpty()){
                                     binding.btnWeb.visibility = View.VISIBLE
-                                }
+//                                }
                                 binding.btnWeb.setOnClickListener {
                                     val i = Intent(Intent.ACTION_VIEW, Uri.parse("$websiteValue"))
                                     startActivity(i)
                                 }
                             }
                         }
-                        if (reddit!!.isNotEmpty()) {
+                        if (reddit?.isNotEmpty() == true) {
                             val redditValue = reddit?.get(0)
+                            Log.d("reddit", "$redditValue")
                             if (redditValue != null) {
-                                if (redditValue.isNotEmpty()){
+//                                if (redditValue.isNotEmpty()){
                                     binding.btnReddit.visibility = View.VISIBLE
-                                }
+//                                }
                                 binding.btnWeb.setOnClickListener {
                                     val i = Intent(Intent.ACTION_VIEW, Uri.parse("$redditValue"))
                                     startActivity(i)
