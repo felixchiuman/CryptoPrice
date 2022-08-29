@@ -3,7 +3,7 @@ package com.felix.cryptoprice.ui.home.trending
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.felix.cryptoprice.data.Repository
 import com.felix.cryptoprice.data.api.model.trending.GetTrendingLatestResponse
-import com.felix.cryptoprice.data.rule.MainCoroutineRule
+import com.felix.cryptoprice.ui.rule.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest

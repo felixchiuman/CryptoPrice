@@ -1,4 +1,4 @@
-package com.felix.cryptoprice.data.rule
+package com.felix.cryptoprice.ui.rule
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
